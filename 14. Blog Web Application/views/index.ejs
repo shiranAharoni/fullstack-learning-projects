@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    
+    <title>The Pilates Blog</title>
+</head>
+<body>
+    <img src="/pilatesPose.png" alt="Pilates pose" height="300">
+    <h1>welcome to the pilates blog</h1>
+    <p>Here you can share lesson plans, exercises, and ideas, ask questions, or simply browse what others have shared. </p>
+    <form action="/submit" method="POST">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Your name</label>
+            <input type="text" class="form-control" name= "author" id="exampleFormControlInput1" placeholder="Full name" value="<%= postName %>" >
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Share with us</label>
+            <textarea class="form-control" name= "content" id="exampleFormControlTextarea1" rows="3"><%= postText %></textarea>
+        </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #4A3728; border: none;">
+            Submit
+            </button>
+        </div>
+    </form>
+
+    <hr class="mt-5 mb-5" style="border-top: 2px solid #4A3728;">
+
+    <div class="container col-md-6 mb-5">
+        
+        <h3 class="text-center mb-4" style="color: #4A3728;">Community Posts</h3>
+
+        <% if (locals.posts && posts.length > 0) { %>
+
+            <% posts.forEach((post, index) => { %>
+                
+                <div class="card mb-3" style="border: 1px solid #4A3728;">
+                    <div class="card-body" style="background-color: #fdfbf7;">
+                        
+                        <h5 class="card-title" style="color: #4A3728; font-weight: bold;">
+                            <%= post.name %>
+                        </h5>
+                        
+                        <p class="card-text">
+                            <%= post.text %>
+                        </p>
+                        <div class="d-flex gap-2">
+                            <form action="/delete" method="POST" class="w-100">
+                                <input type="hidden" name="postIndex" value="<%= index %>">
+    
+                                <button type="submit" class="btn w-100" style="background-color: #4A3728; color: white; border: none;">
+                                    Delete
+                                </button>
+                            </form>
+                            <a href="/edit/<%= index %>" class="btn w-100" style="background-color: #4A3728; color: white; border: none;">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            <% }) %>
+            <% } else { %>
+            
+            <p class="text-center" style="color: #7a7a7a;">
+                No posts yet. Be the first to share your thoughts!
+            </p>
+
+        <% } %>
+
+    </div>
+</body>
+</html>

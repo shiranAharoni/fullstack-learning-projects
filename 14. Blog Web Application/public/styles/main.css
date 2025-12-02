@@ -1,0 +1,23 @@
+body{
+    font-family: "Cinzel", serif;
+    background-color: #C4A484;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1{
+    color: #F7F1DE;
+    margin-top: 0px;
+}
+
+p{
+    color: #4A3728;
+    font-size: large;
+}
+.mb-3{
+    margin: 10px;
+}
